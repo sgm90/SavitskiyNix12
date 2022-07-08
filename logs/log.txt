@@ -1,0 +1,2 @@
+2022-07-08 15:12:46,131 INFO com.nixCompany.myLibProjekt.entities.LibraryCustomer [main] Customer was deleted
+2022-07-08 15:12:46,135 INFO com.nixCompany.myLibProjekt.entities.LibraryCustomer [main] Customer was deleted
