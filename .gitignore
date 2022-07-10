@@ -5,6 +5,12 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+logs
+*.iws
+*.iml
+*.ipr
+*.log
+
 
 ### Eclipse ###
 .apt_generated
@@ -30,3 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
