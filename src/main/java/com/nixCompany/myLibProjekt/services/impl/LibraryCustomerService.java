@@ -2,7 +2,7 @@ package com.nixCompany.myLibProjekt.services.impl;
 
 import com.nixCompany.myLibProjekt.entities.LibraryCustomer;
 import com.nixCompany.myLibProjekt.entities.Sex;
-import com.nixCompany.myLibProjekt.services.LibraryCustomerService;
+import com.nixCompany.myLibProjekt.services.LibraryCustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,14 +11,14 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class ImplLibraryCustomerService implements LibraryCustomerService {
+public class LibraryCustomerService implements LibraryCustomerRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LibraryCustomer.class);
     private static List<LibraryCustomer> libraryCustomerList;
 
-    public List<LibraryCustomer> ImplLibraryCustomerService() {
+    public LibraryCustomerService() {
         libraryCustomerList = createListOfCustomers();
-        return libraryCustomerList;
+
     }
 
 
@@ -29,7 +29,7 @@ public class ImplLibraryCustomerService implements LibraryCustomerService {
     @Override
     public List<LibraryCustomer> createListOfCustomers() {
         if (getLibraryList() == null) {
-            this.libraryCustomerList = new ArrayList<>(100);
+            libraryCustomerList = new ArrayList<>(100);
         }
         return libraryCustomerList;
     }

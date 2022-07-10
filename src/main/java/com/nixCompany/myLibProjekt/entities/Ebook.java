@@ -8,16 +8,17 @@ public class Ebook {
     private String author;
     private String language;
     private int numberOfPages;
-    LocalDate dateOfRelease;
 
-    public Ebook(int id, String name, String author, String language, int numberOfPages, LocalDate dateOfRelease) {
+
+    public Ebook(int id, String name, String author, String language, int numberOfPages) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.language = language;
         this.numberOfPages = numberOfPages;
-        this.dateOfRelease = dateOfRelease;
+
     }
+
 
     public int getId() {
         return id;
@@ -59,13 +60,6 @@ public class Ebook {
         this.numberOfPages = numberOfPages;
     }
 
-    public LocalDate getDateOfRelease() {
-        return dateOfRelease;
-    }
-
-    public void setDateOfRelease(LocalDate dateOfRelease) {
-        this.dateOfRelease = dateOfRelease;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -78,8 +72,7 @@ public class Ebook {
         if (getNumberOfPages() != ebook.getNumberOfPages()) return false;
         if (!getName().equals(ebook.getName())) return false;
         if (!getAuthor().equals(ebook.getAuthor())) return false;
-        if (!getLanguage().equals(ebook.getLanguage())) return false;
-        return getDateOfRelease().equals(ebook.getDateOfRelease());
+        return getLanguage().equals(ebook.getLanguage());
     }
 
     @Override
@@ -89,7 +82,6 @@ public class Ebook {
         result = 31 * result + getAuthor().hashCode();
         result = 31 * result + getLanguage().hashCode();
         result = 31 * result + getNumberOfPages();
-        result = 31 * result + getDateOfRelease().hashCode();
         return result;
     }
 
@@ -101,7 +93,6 @@ public class Ebook {
                 ", author='" + author + '\'' +
                 ", language='" + language + '\'' +
                 ", numberOfPages=" + numberOfPages +
-                ", dateOfRelease=" + dateOfRelease +
                 '}';
     }
 }

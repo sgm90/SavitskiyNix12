@@ -1,21 +1,18 @@
 package com.nixCompany.myLibProjekt.services.impl;
 
 import com.nixCompany.myLibProjekt.entities.Ebook;
-import com.nixCompany.myLibProjekt.services.EbookService;
+import com.nixCompany.myLibProjekt.services.EbookRepository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ImplEbookService implements EbookService {
+public class EbookService implements EbookRepository {
+    public EbookService() {
+        ebookList = createListOfEbooks();
+    }
 
     private static List<Ebook> ebookList;
-
-    public List<Ebook> ImplEbookService() {
-        ebookList = createListOfEbooks();
-        return ebookList;
-    }
 
     @Override
     public List<Ebook> createListOfEbooks() {
@@ -43,22 +40,17 @@ public class ImplEbookService implements EbookService {
     }
 
     @Override
-    public boolean create(int id, String name, String author, String language, int numberOfPages, LocalDate dateOfRelease) {
-        Ebook book = new Ebook(id, name, author, language, numberOfPages, dateOfRelease);
-        if (book == null){
-            return false;
-        }
-        return true;
+    public Ebook create(int id, String name, String author, String language, int numberOfPages) {
+        return new Ebook(id, name, author, language, numberOfPages);
     }
 
     @Override
-    public Ebook update(Ebook ebook,int id, String name, String author, String language, int numberOfPages, LocalDate dateOfRelease) {
+    public Ebook update(Ebook ebook, int id, String name, String author, String language, int numberOfPages) {
         ebook.setId(id);
         ebook.setName(name);
         ebook.setAuthor(author);
         ebook.setLanguage(language);
         ebook.setNumberOfPages(numberOfPages);
-        ebook.setDateOfRelease(dateOfRelease);
         return ebook;
     }
 

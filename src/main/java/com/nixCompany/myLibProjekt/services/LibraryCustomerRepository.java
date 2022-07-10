@@ -5,7 +5,7 @@ import com.nixCompany.myLibProjekt.entities.Sex;
 
 import java.util.List;
 
-public interface LibraryCustomerService {
+public interface LibraryCustomerRepository {
 
     List<LibraryCustomer> createListOfCustomers();
     List<LibraryCustomer> getAll();
