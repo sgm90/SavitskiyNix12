@@ -1,10 +1,10 @@
-package com.nixCompany.myLibProjekt.services;
+package com.nixCompany.myLibProjekt.repository;
 
 import com.nixCompany.myLibProjekt.entities.Ebook;
 
 import java.util.List;
 
-public interface EbookRepository {
+public interface IEbookRetory {
 
     List<Ebook> createListOfEbooks();
     List<Ebook> getAll();

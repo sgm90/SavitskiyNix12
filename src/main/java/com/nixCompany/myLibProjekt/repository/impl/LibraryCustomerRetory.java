@@ -1,8 +1,8 @@
-package com.nixCompany.myLibProjekt.services.impl;
+package com.nixCompany.myLibProjekt.repository.impl;
 
 import com.nixCompany.myLibProjekt.entities.LibraryCustomer;
 import com.nixCompany.myLibProjekt.entities.Sex;
-import com.nixCompany.myLibProjekt.services.LibraryCustomerRepository;
+import com.nixCompany.myLibProjekt.repository.ILibraryCustomerRetory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,31 +11,26 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class LibraryCustomerService implements LibraryCustomerRepository {
+public class LibraryCustomerRetory implements ILibraryCustomerRetory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LibraryCustomer.class);
     private static List<LibraryCustomer> libraryCustomerList;
 
-    public LibraryCustomerService() {
-        libraryCustomerList = createListOfCustomers();
+    public LibraryCustomerRetory() {
+        libraryCustomerList = InitLibCustList();
 
-    }
-
-
-    public List<LibraryCustomer> getLibraryList() {
-        return libraryCustomerList;
     }
 
     @Override
-    public List<LibraryCustomer> createListOfCustomers() {
-        if (getLibraryList() == null) {
+    public List<LibraryCustomer> InitLibCustList() {
+        if (libraryCustomerList == null) {
             libraryCustomerList = new ArrayList<>(100);
         }
         return libraryCustomerList;
     }
 
     @Override
-    public List<LibraryCustomer> getAll() {
+    public List<LibraryCustomer> getLibraryCustomerList() {
         return libraryCustomerList;
     }
 
@@ -44,10 +39,9 @@ public class LibraryCustomerService implements LibraryCustomerRepository {
         for (LibraryCustomer lb : libraryCustomerList) {
             if (lb.getId() == id) {
                 return lb;
-            } else {
-                System.out.println("There are no Customer with such id");
             }
         }
+        System.out.println("There are no Customer with such id");
         return null;
     }
 
@@ -81,6 +75,7 @@ public class LibraryCustomerService implements LibraryCustomerRepository {
                 return true;
             }
         }
+        LOGGER.info("Customer not found");
         return false;
     }
 
