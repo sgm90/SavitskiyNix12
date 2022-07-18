@@ -2,16 +2,13 @@ package com.nixCompany.myLibProjekt.services;
 
 import com.nixCompany.myLibProjekt.entities.Ebook;
 import com.nixCompany.myLibProjekt.repository.impl.EbookRetory;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.sql.Array;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,13 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EbookServiceTest {
     private EbookService target;
-    private EbookRetory ebookRetory;
+    private static EbookRetory ebookRetory;
+
 
     @BeforeEach
     void setUp() {
 
         ebookRetory = Mockito.mock(EbookRetory.class);
         target = new EbookService(ebookRetory);
+
     }
 
     @Test
@@ -38,9 +37,8 @@ class EbookServiceTest {
         ebookList.add(new Ebook(5, "Java Concurrency in practice", "Tem Payerls", "English", 464));
         ebookList.add(new Ebook(6, "Moder Java", "Ken Kouzen", "English", 275));
         ebookList.add(new Ebook(7, "Java library professional volume 1", "Horstmann Kay", "English", 866));
-        Boolean verify = Mockito.verify(ebookList.size() == 7);
-        Assertions.assertTrue(verify);
-
+        Mockito.when(ebookRetory.createListOfEbooks()).thenThrow(new  IllegalArgumentException("somesing was wrong"));
+//        ebookRetory.createListOfEbooks();
     }
 
     @Test
@@ -53,14 +51,31 @@ class EbookServiceTest {
             for (int i = 0; i < intIds.length; i++) {
                 if (intIds[i] == ebook.getId()) {
                     iterator.remove();
-                    Mockito.times(2);
                 }
             }
         }
     }
 
     @Test
+    public void isEnglish() {
+        ArgumentMatcher argumentMatcher = new ArgumentMatcher() {
+            @Override
+            public boolean matches(Object o) {
+                Ebook ebook = (Ebook) o;
+                if (ebook.getLanguage().equals("English")) {
+                    return true;
+                }
+                return false;
+            }
+        };
+        Ebook ebook = new Ebook(2, "On java 8", "Bryus Ekkel", "English", 1778);
+        argumentMatcher.matches(ebook);
+    }
+
+
+    @Test
     public void printListOffEbooks_Test() {
+        Mockito.when(ebookRetory.createListOfEbooks()).thenCallRealMethod();
         List<Ebook> ebookList = ebookRetory.createListOfEbooks();
         ebookList.add(new Ebook(1, "Java quick start", "Chan J", "English", 272));
         ebookList.add(new Ebook(2, "On java 8", "Bryus Ekkel", "English", 1778));
@@ -68,6 +83,22 @@ class EbookServiceTest {
         target.printListOffEbooks();
 
     }
+
+//    @Test
+//    public void ArgCupTest() {
+//
+//        EbookService ebookService = new EbookService(ebookRetory);
+//        List<Ebook> ebookLis = ebookService.fillAndGetEbookList();
+//        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+//        Mockito.verify(ebookService)???
+//        ebookService.deleteSeveralByIds(1,2);
+//
+//
+//    }
+
+
+
+
 
 
 }

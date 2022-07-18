@@ -2,10 +2,12 @@ package com.nixCompany.myLibProjekt.services.impl;
 
 import com.nixCompany.myLibProjekt.entities.Ebook;
 import com.nixCompany.myLibProjekt.repository.impl.EbookRetory;
+import com.nixCompany.myLibProjekt.services.EbookService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -39,7 +41,9 @@ class EbookRetoryTest {
     void create_One() {
         Assertions.assertEquals(ebook, new Ebook
                 (1,"Java quick start","Chan J", "English", 272));
+
     }
+
 
     @Test
     void update_One() {
@@ -63,9 +67,10 @@ class EbookRetoryTest {
     }
     @Test
     void getAll(){
-        final List<Ebook> actual = target.getAll();
+        final List<Ebook> actual = target.createListOfEbooks();
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(0,actual.size());
     }
+
 
 }

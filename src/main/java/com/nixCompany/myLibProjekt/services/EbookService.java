@@ -44,11 +44,15 @@ public class EbookService {
     }
 
 
-
     public void printListOffEbooks() {
         for (Ebook ebook : ebookRetory.getAll()) {
             System.out.println(ebook);
         }
+    }
+
+    public void hasEbookwithId(int id){
+        Ebook isIn = ebookRetory.getById(id);
+        System.out.println(isIn);
     }
 
 

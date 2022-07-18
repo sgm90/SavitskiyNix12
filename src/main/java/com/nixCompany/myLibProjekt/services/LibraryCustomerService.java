@@ -50,4 +50,14 @@ public class LibraryCustomerService {
             System.out.println(libraryCustomer);
         }
     }
+
+    public LibraryCustomer getLibraryCustomerByFullName(LibraryCustomerRetory libraryCustomerRetory, String name){
+        for (LibraryCustomer libCust : libraryCustomerRetory.getLibraryCustomerList()) {
+            if (name.equals(libCust.getFullName())){
+                return libCust;
+            }
+        }
+        System.out.println("There is no libraryCustomer with that name fuck off");
+        return null;
+    }
 }

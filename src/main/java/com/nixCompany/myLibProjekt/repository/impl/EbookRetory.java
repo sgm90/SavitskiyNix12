@@ -67,4 +67,10 @@ public class EbookRetory implements IEbookRetory {
         }
         return false;
     }
+
+    public int getNumberOfPagesForBook(Ebook ebook){
+        return ebook.getNumberOfPages();
+    }
+
+
 }
