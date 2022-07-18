@@ -84,17 +84,19 @@ class EbookServiceTest {
 
     }
 
-//    @Test
-//    public void ArgCupTest() {
-//
-//        EbookService ebookService = new EbookService(ebookRetory);
-//        List<Ebook> ebookLis = ebookService.fillAndGetEbookList();
-//        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
-//        Mockito.verify(ebookService)???
-//        ebookService.deleteSeveralByIds(1,2);
-//
-//
-//    }
+    @Test
+    public void ArgCupTest() {
+
+        EbookService ebookService = Mockito.mock(EbookService.class);
+        List<Ebook> ebookLis = ebookService.fillAndGetEbookList();
+        ebookService.deleteSeveralByIds(1,2);
+        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+        Mockito.verify(ebookService, Mockito.atLeastOnce()).deleteSeveralByIds(captor.capture());
+        List<Integer> capturedList = captor.getAllValues();
+        System.out.println(capturedList);
+
+
+    }
 
 
 
