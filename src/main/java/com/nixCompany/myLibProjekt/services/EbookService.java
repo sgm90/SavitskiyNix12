@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class EbookService {
 
@@ -51,7 +52,7 @@ public class EbookService {
     }
 
     public void hasEbookwithId(int id){
-        Ebook isIn = ebookRetory.getById(id);
+        Optional<Ebook> isIn = ebookRetory.getById(id);
         System.out.println(isIn);
     }
 

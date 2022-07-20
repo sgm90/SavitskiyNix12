@@ -42,7 +42,7 @@ class EbookServiceTest {
     }
 
     @Test
-    void deleteSeveralByIds_TwoIdsDeleting() throws Exception {
+    void deleteSeveralByIds_TwoIdsDeleting() {
         int[] intIds = {1, 4};
         List<Ebook> ebookList = ebookRetory.getAll();
         Iterator<Ebook> iterator = ebookList.iterator();

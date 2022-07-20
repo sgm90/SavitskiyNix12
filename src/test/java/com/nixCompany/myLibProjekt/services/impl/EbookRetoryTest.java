@@ -10,6 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Optional;
 
 class EbookRetoryTest {
 
@@ -26,14 +27,14 @@ class EbookRetoryTest {
     @Test
     void getById_findOne() {
         target.getAll().add(ebook);
-        final Ebook actual = target.getById(1);
+        final Optional<Ebook> actual = target.getById(1);
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(ebook, actual);
     }
     @Test
     void getById_notFound() {
         target.getAll().add(ebook);
-        final Ebook actual = target.getById(1231);
+        final Optional<Ebook> actual = target.getById(1231);
         Assertions.assertNull(actual);
     }
 

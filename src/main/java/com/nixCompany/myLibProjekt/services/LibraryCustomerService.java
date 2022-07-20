@@ -51,9 +51,9 @@ public class LibraryCustomerService {
         }
     }
 
-    public LibraryCustomer getLibraryCustomerByFullName(LibraryCustomerRetory libraryCustomerRetory, String name){
+    public LibraryCustomer getLibraryCustomerByFullName(LibraryCustomerRetory libraryCustomerRetory, String fullName){
         for (LibraryCustomer libCust : libraryCustomerRetory.getLibraryCustomerList()) {
-            if (name.equals(libCust.getFullName())){
+            if (fullName.equals(libCust.getFullName())){
                 return libCust;
             }
         }

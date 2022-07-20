@@ -6,6 +6,7 @@ import com.nixCompany.myLibProjekt.repository.IEbookRetory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class EbookRetory implements IEbookRetory {
 
@@ -30,14 +31,14 @@ public class EbookRetory implements IEbookRetory {
     }
 
     @Override
-    public Ebook getById(int id) {
+    public Optional<Ebook> getById(int id) {
         for (Ebook book : ebookList) {
             if (book.getId() == id) {
-                return book;
+                return Optional.of(book);
             }
         }
         System.out.println("There are no Ebook with such id");
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -66,10 +67,6 @@ public class EbookRetory implements IEbookRetory {
             }
         }
         return false;
-    }
-
-    public int getNumberOfPagesForBook(Ebook ebook){
-        return ebook.getNumberOfPages();
     }
 
 
