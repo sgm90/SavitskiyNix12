@@ -2,12 +2,15 @@ package com.nixCompany.myLibProjekt.services.impl;
 
 import com.nixCompany.myLibProjekt.entities.Ebook;
 import com.nixCompany.myLibProjekt.repository.impl.EbookRetory;
+import com.nixCompany.myLibProjekt.services.EbookService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Optional;
 
 class EbookRetoryTest {
 
@@ -24,22 +27,24 @@ class EbookRetoryTest {
     @Test
     void getById_findOne() {
         target.getAll().add(ebook);
-        final Ebook actual = target.getById(1);
+        final Optional<Ebook> actual = target.getById(1);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(ebook, actual);
+        Assertions.assertEquals(ebook, actual.get());
     }
     @Test
     void getById_notFound() {
         target.getAll().add(ebook);
-        final Ebook actual = target.getById(1231);
-        Assertions.assertNull(actual);
+        final Optional<Ebook> actual = target.getById(1231);
+        Assertions.assertTrue(actual.isEmpty());
     }
 
     @Test
     void create_One() {
         Assertions.assertEquals(ebook, new Ebook
                 (1,"Java quick start","Chan J", "English", 272));
+
     }
+
 
     @Test
     void update_One() {
@@ -51,9 +56,10 @@ class EbookRetoryTest {
 
     @Test
     void delete_One_byId() {
-        List<Ebook> ebookList = target.getAll();
+        List<Ebook>myList= target.createListOfEbooks();
+        myList.add(ebook);
         target.delete(1);
-        Assertions.assertTrue(null == target.getById(1));
+        Assertions.assertTrue(myList.size() == 0);
     }
     @Test
     void deleteOneById_notFound() {
@@ -63,9 +69,11 @@ class EbookRetoryTest {
     }
     @Test
     void getAll(){
-        final List<Ebook> actual = target.getAll();
+        final List<Ebook> actual = target.createListOfEbooks();
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(0,actual.size());
+        actual.add(ebook);
+        Assertions.assertEquals(1, actual.size());
     }
+
 
 }

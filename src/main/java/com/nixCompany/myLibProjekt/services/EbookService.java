@@ -8,11 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
-public class EbookService {
+public class EbookService extends AbstractEbookService {
 
     private final EbookRetory ebookRetory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Ebook.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(Ebook.class);
 
     public EbookService(EbookRetory ebookRetory){
         this.ebookRetory = ebookRetory;
@@ -29,26 +30,17 @@ public class EbookService {
         LOGGER.info("List was filed");
         return ebookList;
     }
-    public void deleteSeveralByIds(int... intIds) {
-        List<Ebook> ebookList = ebookRetory.getAll();
-        Iterator<Ebook> iterator = ebookList.iterator();
-        while (iterator.hasNext()) {
-            final Ebook ebook = iterator.next();
-            for (int i = 0; i < intIds.length; i++) {
-                if (intIds[i] == ebook.getId()) {
-                    iterator.remove();
-                    LOGGER.info(ebook.getName() + " was deleted");
-                }
-            }
-        }
-    }
-
-
 
     public void printListOffEbooks() {
         for (Ebook ebook : ebookRetory.getAll()) {
             System.out.println(ebook);
         }
+    }
+
+
+    @Override
+    public void printMyEbook(Ebook t) {
+        System.out.println(t.toString());
     }
 
 
