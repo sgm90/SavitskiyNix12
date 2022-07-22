@@ -45,7 +45,6 @@ public class OptionalService {
     }
 
     void ifPresent(int id) {
-        Optional<Ebook> ebook1 = ebookRetory.getById(id);
         ebookRetory.getById(id).ifPresent(ebook -> {
             System.out.println(ebook.getName());
         });
@@ -80,14 +79,12 @@ public class OptionalService {
         });
     }
 
-    void filter(int id) {
-        ebookRetory.getById(id).filter(Predicate.isEqual(myListOfBooks.get(id)));
+    boolean filter(int id) {
+        return ebookRetory.getById(id).filter(Predicate.isEqual(myListOfBooks.get(id))).isPresent();
     }
-
     void orElseThrow(int id){
         final  Ebook ebook = ebookRetory.getById(id).orElseThrow(() ->new IllegalArgumentException("Cannot find auto with id " + id));
     }
-
     void or(int id){
         final Optional<Ebook> ebookOptional1 = ebookRetory.getById(id).or(() ->{
             System.out.println("ups, i do not have it");

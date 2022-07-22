@@ -29,13 +29,13 @@ class EbookRetoryTest {
         target.getAll().add(ebook);
         final Optional<Ebook> actual = target.getById(1);
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(ebook, actual);
+        Assertions.assertEquals(ebook, actual.get());
     }
     @Test
     void getById_notFound() {
         target.getAll().add(ebook);
         final Optional<Ebook> actual = target.getById(1231);
-        Assertions.assertNull(actual);
+        Assertions.assertTrue(actual.isEmpty());
     }
 
     @Test
@@ -56,9 +56,10 @@ class EbookRetoryTest {
 
     @Test
     void delete_One_byId() {
-        List<Ebook> ebookList = target.getAll();
+        List<Ebook>myList= target.createListOfEbooks();
+        myList.add(ebook);
         target.delete(1);
-        Assertions.assertTrue(null == target.getById(1));
+        Assertions.assertTrue(myList.size() == 0);
     }
     @Test
     void deleteOneById_notFound() {
@@ -70,7 +71,8 @@ class EbookRetoryTest {
     void getAll(){
         final List<Ebook> actual = target.createListOfEbooks();
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(0,actual.size());
+        actual.add(ebook);
+        Assertions.assertEquals(1, actual.size());
     }
 
 
